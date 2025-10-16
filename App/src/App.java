@@ -1,6 +1,9 @@
 import Modelo.Modelo;
+import Modelo.Modelo.Pelicula;
+
 import java.util.Scanner;
 import java.util.ArrayList;
+
 
 
 public class App {
@@ -22,6 +25,7 @@ public class App {
     public static void main(String[] args) throws Exception {
     int opcion,numPeliculas;
     float factorX=1.0f;
+    char oscar=0;
     Scanner sc= new Scanner(System.in);
     do{
         Menu();
@@ -50,7 +54,27 @@ public class App {
         }while(factorX<0.25 || factorX>2.5);
         break;
         case 3:
+            sc.nextLine();
+            Pelicula peli =new Modelo.Pelicula();
             System.out.println("Añadir una nueva película a la videoteca");
+            System.out.println("Titulo: ");
+            peli.titulo=sc.nextLine();
+            System.out.println("Director: ");
+            peli.director=new Modelo.Director();
+            peli.director.nombre=sc.nextLine();
+            do{
+            System.out.println("Indique 1 si ha ganado un Oscar y 0 de lo contrario: ");
+             oscar = sc.nextLine().charAt(0);
+            }while(oscar!='0' && oscar!='1');
+            peli.director.ganadorOscar= parseInt(oscar)==1;
+            System.out.println("Año de estreno: ");
+            peli.añoEstreno=sc.nextInt();
+            System.out.println("Duración en minutos: ");
+            peli.duracionMinutos=sc.nextInt();
+            sc.nextLine();
+            System.out.println("Valoracion: ");
+            peli.valoracion=sc.nextLine();
+            System.out.println("Película añadida correctamente.");
 
             break;
     
