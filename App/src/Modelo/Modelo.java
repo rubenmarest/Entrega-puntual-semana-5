@@ -50,8 +50,14 @@ public class Modelo {
         public int getDuracionMinutos() {
              return duracionMinutos;
              }
-        public float getValoracion() 
-        { return valoracion; 
+        public float getValoracion(){
+            if(valoracion < 0.0f) {
+                return 0.0f; 
+            } else if (valoracion > 10.0f) {
+                return 10.0f; 
+            } else {
+         return valoracion;
+            }
         }
 
         public float getTiempoVisionado(float factorVelocidad) {

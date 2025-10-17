@@ -20,8 +20,7 @@ public class App {
         System.out.print("Seleccione una opción (1-5): ");
     }
 
-    // --- MÉTODO PARA MOSTRAR LA INFORMACIÓN ---
-    // Esta lógica ahora está aquí, en la "vista", y no en el "modelo".
+
     public static void mostrarInformacionVideoteca(Videoteca videoteca, float factorVelocidad) {
         int numPeliculasActuales = videoteca.getNumPeliculasActuales();
         Pelicula[] peliculas = videoteca.getPeliculas();
@@ -40,7 +39,6 @@ public class App {
         System.out.printf("| %-25s | %-12s | %-20s | %-12s | %-15s | %-20s | %-10s |\n", "Título", "Año Estreno", "Director", "Oscar Ganado", "Duración (min)", "Tiempo Visionado (min)", "Valoración");
         System.out.println("|-----------------------------------------------------------------------------------------------------------------|");
 
-        
         for (int i = 0; i < numPeliculasActuales; i++) {
             Pelicula p = peliculas[i];
             Director d = p.getDirector();
@@ -94,13 +92,17 @@ public class App {
                     case 2:
                         do {
                             System.out.print("Inserte el factor de velocidad (0,25-2,5): ");
-                            while(!sc.hasNextFloat()){
+                            if (sc.hasNextFloat()) {
                                 factorX = sc.nextFloat();
-                            } 
-                            if (factorX < 0.25 || factorX > 2.5) {
-                                System.out.println("Opción no válida, seleccione una opción entre 0,25 y 2,5");
+                                if (factorX < 0.25 || factorX > 2.5) {
+                                    System.out.println("Opción no válida, seleccione una opción entre 0,25 y 2,5");
+                                } else {
+                                    System.out.println("Velocidad de reproducción configurada a: " + factorX + "x");
+                                }
                             } else {
-                                System.out.println("Velocidad de reproducción configurada a: " + factorX + "x");
+                                System.out.println("Entrada no válida, por favor introduzca un número.");
+                                sc.next(); 
+                                factorX = 0; 
                             }
                         } while (factorX < 0.25 || factorX > 2.5);
                         break;
@@ -153,17 +155,17 @@ public class App {
                             System.out.println("ERROR: Primero debe crear la videoteca (opción 1).");
                             break;
                         }
+                        
                         mostrarInformacionVideoteca(miVideoteca, factorX);
                         break;
                     case 5:
-                        System.out.println("Saliendo del programa.");
+                        System.out.println("Saliendo del programa. ¡Hasta pronto!");
                         break;
                 }
             } else {
-               
                 System.out.println("Error: Por favor, introduce un número válido para la opción.");
-                sc.next();
-                opcion = 0;
+                sc.next(); 
+                opcion = 0; 
             }
         } while (opcion != 5);
         sc.close();
