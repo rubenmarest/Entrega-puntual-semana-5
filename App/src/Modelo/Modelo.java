@@ -71,6 +71,15 @@ public class Modelo {
             this.numPeliculasActuales = 0; 
         }
 
+        public boolean anadirPelicula(Pelicula p) {
+             if (numPeliculasActuales < peliculas.length) {
+                peliculas[numPeliculasActuales] = p; 
+                numPeliculasActuales++; 
+                return true; 
+            } else {
+                return false;
+            }
+        }
 
         public Pelicula[] getPeliculas() {
             return peliculas;
